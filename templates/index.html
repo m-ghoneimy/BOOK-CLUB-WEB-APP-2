@@ -1,0 +1,145 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+<h1 class="cCont" style="margin-bottom:20px;">Choose a department</h1>
+<div class="row">
+    <div class="col cCont">
+        <button class="btn btn-primary" role="button" id="anthBtn">ANTH</button>
+    </div>
+    <div class="col cCont">
+        <button class="btn btn-primary" role="button" id="bioBtn">BIO</button>
+    </div>
+    <div class="col cCont">
+        <button class="btn btn-primary" role="button" id="ciscBtn">CISC</button>
+    </div>
+    <div class="col cCont">
+        <button class="btn btn-primary" role="button" id="engBtn">ENG</button>
+    </div>
+    <div class="col cCont">
+        <button class="btn btn-primary" role="button" id="mathBtn">MATH</button>
+    </div>
+</div>
+{% for post in posts %}
+<article class="media content-section {{ post.department }}" style="margin-top:20px;">
+    <img src="{{ url_for('static', filename=post.imageFile) }}" class="img-fluid"
+        style="max-height:150px; margin-right:20px;" alt="">
+    <div class="media-body">
+        <h2 class="article-title"><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
+        <div>
+            <h6 class="mr-2" href="#">Posted by: {{ post.author.firstName }} {{ post.author.lastName }}</h6>
+            <h6 class="mr-2" href="#">Department: {{ post.department }}</h6>
+            <h6 class="mr-2" href="#">Date posted: {{ post.datePosted.strftime('%Y-%m-%d') }}</h6>
+        </div>
+    </div>
+</article>
+{% endfor %}
+{% endblock %}
+{% block script %}
+<script>
+    let anthBtn = document.querySelector('#anthBtn');
+    let bioBtn = document.querySelector('#bioBtn');
+    let ciscBtn = document.querySelector('#ciscBtn');
+    let engBtn = document.querySelector('#engBtn');
+    let mathBtn = document.querySelector('#mathBtn');
+
+    let allAnth = document.querySelectorAll('.ANTH');
+    let allBio = document.querySelectorAll('.BIO');
+    let allCisc = document.querySelectorAll('.CISC');
+    let allEng = document.querySelectorAll('.ENG');
+    let allMath = document.querySelectorAll('.MATH');
+
+    anthBtn.onclick = () => {
+        allAnth.forEach(e => {
+            e.classList.remove('displayNone')
+        });
+        allBio.forEach(e => {
+            e.classList.add('displayNone')
+        });
+        allCisc.forEach(e => {
+            e.classList.add('displayNone')
+        });
+        allEng.forEach(e => {
+            e.classList.add('displayNone')
+        });
+        allMath.forEach(e => {
+            e.classList.add('displayNone')
+        });
+    }
+
+    bioBtn.onclick = () => {
+        allAnth.forEach(e => {
+            e.classList.add('displayNone')
+        });
+        allBio.forEach(e => {
+            e.classList.remove('displayNone')
+        });
+        allCisc.forEach(e => {
+            e.classList.add('displayNone')
+        });
+        allEng.forEach(e => {
+            e.classList.add('displayNone')
+        });
+        allMath.forEach(e => {
+            e.classList.add('displayNone')
+        });
+    }
+
+    ciscBtn.onclick = () => {
+        allAnth.forEach(e => {
+            e.classList.add('displayNone')
+        });
+        allBio.forEach(e => {
+            e.classList.add('displayNone')
+        });
+        allCisc.forEach(e => {
+            e.classList.remove('displayNone')
+        });
+        allEng.forEach(e => {
+            e.classList.add('displayNone')
+        });
+        allMath.forEach(e => {
+            e.classList.add('displayNone')
+        });
+    }
+
+    engBtn.onclick = () => {
+        allAnth.forEach(e => {
+            e.classList.add('displayNone')
+        });
+        allBio.forEach(e => {
+            e.classList.add('displayNone')
+        });
+        allCisc.forEach(e => {
+            e.classList.add('displayNone')
+        });
+        allEng.forEach(e => {
+            e.classList.remove('displayNone')
+        });
+        allMath.forEach(e => {
+            e.classList.add('displayNone')
+        });
+    }
+
+    mathBtn.onclick = () => {
+        allAnth.forEach(e => {
+            e.classList.add('displayNone')
+        });
+        allBio.forEach(e => {
+            e.classList.add('displayNone')
+        });
+        allCisc.forEach(e => {
+            e.classList.add('displayNone')
+        });
+        allEng.forEach(e => {
+            e.classList.add('displayNone')
+        });
+        allMath.forEach(e => {
+            e.classList.remove('displayNone')
+        });
+    }
+</script>
+{% endblock %}

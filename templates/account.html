@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Account
+{% endblock %}
+
+{% block content %}
+<h1>Your posts</h1>
+{% for post in posts %}
+<article class="media content-section {{ post.department }}" style="margin-top:20px;">
+    <img src="{{ url_for('static', filename=post.imageFile) }}" class="img-fluid"
+        style="max-height:150px; margin-right:20px;" alt="">
+    <div class="media-body">
+        <h2 class="article-title"><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
+        <div>
+            <h6 class="mr-2" href="#">Posted by: {{ post.author.firstName }} {{ post.author.lastName }}</h6>
+            <h6 class="mr-2" href="#">Department: {{ post.department }}</h6>
+            <h6 class="mr-2" href="#">Date posted: {{ post.datePosted.strftime('%Y-%m-%d') }}</h6>
+        </div>
+    </div>
+</article>
+{% endfor %}
+{% endblock %}
